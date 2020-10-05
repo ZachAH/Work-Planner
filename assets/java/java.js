@@ -1,23 +1,20 @@
 $(document).ready(function () {
-    // listen for save button clicks
+  //listen and get the button click to start function and grab the var items  
     $(".saveBtn").on("click", function () {
-        // get nearby values
         var value = $(this).siblings(".task").val();
         var time = $(this).parent().attr("id");
+        
 
-        // save in localStorage
+        // saves to local storage
         localStorage.setItem(time, value);
     });
 
+    //fucntion to get time and put the items into new classes depending on times of when they were assigned
     function hours1() {
-        // get current number of hours
         var currentHour = moment().hours();
-
-        // loop over time blocks
+        
         $(".time-block").each(function () {
             var blockHour = parseInt($(this).attr("id").split("-")[1]);
-
-            // check if we've moved past this time
             if (blockHour < currentHour) {
                 $(this).addClass("past");
             }
@@ -35,22 +32,24 @@ $(document).ready(function () {
 
     hours1();
 
-    // set up interval to check if current time needs to be updated
-    var interval = setInterval(hours1, 15000);
+    //sets the var to update every 15 seconds
+        var interval = setInterval(hours1, 15000);
+        // load any saved data from localStorage
+        $("#hour-1 .task").val(localStorage.getItem("hour-1"));
+        $("#hour-2 .task").val(localStorage.getItem("hour-2"));
+        $("#hour-3 .task").val(localStorage.getItem("hour-3"));
+        $("#hour-4 .task").val(localStorage.getItem("hour-4"));
+        $("#hour-5 .task").val(localStorage.getItem("hour-5"));
+        $("#hour-6 .task").val(localStorage.getItem("hour-6"));
+        $("#hour-7 .task").val(localStorage.getItem("hour-7"));
+        $("#hour-8 .task").val(localStorage.getItem("hour-8"));
+        $("#hour-9 .task").val(localStorage.getItem("hour-9"));
+    
+        // display current day on page with media query
+        $("#currentDay").text(moment().format("dddd, MMMM Do"));
+    });
+            
+        
 
-    // load any saved data from localStorage
-    $("#hour-9 .description").val(localStorage.getItem("hour-9"));
-    $("#hour-10 .description").val(localStorage.getItem("hour-10"));
-    $("#hour-11 .description").val(localStorage.getItem("hour-11"));
-    $("#hour-12 .description").val(localStorage.getItem("hour-12"));
-    $("#hour-13 .description").val(localStorage.getItem("hour-13"));
-    $("#hour-14 .description").val(localStorage.getItem("hour-14"));
-    $("#hour-15 .description").val(localStorage.getItem("hour-15"));
-    $("#hour-16 .description").val(localStorage.getItem("hour-16"));
-    $("#hour-17 .description").val(localStorage.getItem("hour-17"));
-
-    // display current day on page
-    $("#currentDay").text(moment().format("dddd, MMMM Do"));
-});
 
 
